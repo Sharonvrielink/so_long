@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/07 17:12:49 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/07 18:21:58 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void    printmap(t_gamedata *gamedata)
     }
 }
 
-bool    check_valid_position(t_gamedata *gamedata, t_direction direction)
+bool    check_valid_move(t_gamedata *gamedata, t_direction direction)
 {
     int32_t xtilepos;
     int32_t ytilepos;
@@ -188,9 +188,9 @@ void	move_fox_hook(void *param)
     {
         if (mlx_is_key_down(gamedata->mlx, MLX_KEY_ESCAPE))
             mlx_close_window(gamedata->mlx);
-        if (mlx_is_key_down(gamedata->mlx, MLX_KEY_UP))
+        if (mlx_is_key_down(gamedata->mlx, MLX_KEY_W))
         {
-            valid = check_valid_position(gamedata, UP);
+            valid = check_valid_move(gamedata, UP);
             if (valid == true)
             {
                 mlx_draw_texture(gamedata->sprite.fox_img, gamedata->sprite.foxup_texture, 0, 0);
@@ -200,9 +200,9 @@ void	move_fox_hook(void *param)
                 printf("Moves: %d\n", gamedata->moves);
             }
         }
-        if (mlx_is_key_down(gamedata->mlx, MLX_KEY_DOWN))
+        if (mlx_is_key_down(gamedata->mlx, MLX_KEY_S))
         {
-            valid = check_valid_position(gamedata, DOWN);
+            valid = check_valid_move(gamedata, DOWN);
             if (valid == true)
             {
                 mlx_draw_texture(gamedata->sprite.fox_img, gamedata->sprite.fox_texture, 0, 0);
@@ -212,9 +212,9 @@ void	move_fox_hook(void *param)
                 printf("Moves: %d\n", gamedata->moves);
             }
         }
-        if (mlx_is_key_down(gamedata->mlx, MLX_KEY_LEFT))
+        if (mlx_is_key_down(gamedata->mlx, MLX_KEY_A))
         {
-            valid = check_valid_position(gamedata, LEFT);
+            valid = check_valid_move(gamedata, LEFT);
             if (valid == true)
             {
                 mlx_draw_texture(gamedata->sprite.fox_img, gamedata->sprite.foxleft_texture, 0, 0);
@@ -224,9 +224,9 @@ void	move_fox_hook(void *param)
                 printf("Moves: %d\n", gamedata->moves);
             }
         }
-        if (mlx_is_key_down(gamedata->mlx, MLX_KEY_RIGHT))
+        if (mlx_is_key_down(gamedata->mlx, MLX_KEY_D))
         {
-            valid = check_valid_position(gamedata, RIGHT);
+            valid = check_valid_move(gamedata, RIGHT);
             if (valid == true)
             {
                 mlx_draw_texture(gamedata->sprite.fox_img, gamedata->sprite.foxright_texture, 0, 0);
