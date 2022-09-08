@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/08 13:29:31 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/08 19:58:13 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ void    delete_img(mlx_t *mlx, t_sprite *sprite)
 int32_t so_long(void)
 {
     t_gamedata gamedata;
-
+	
+	read_map("./maps/smallest_valid.ber");
     gamedata.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
     if (!gamedata.mlx)
         exit(EXIT_FAILURE); //These exit statuses are defined in stdlib, failure is 1 success = 0 

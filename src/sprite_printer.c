@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/08 13:24:24 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/08 13:25:48 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/08 19:59:07 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,7 @@ void    printmap(t_gamedata *gamedata)
         "10000000E1", 
         "1111111111"};
         
-    
-    // char language[5][10] = {"Java", "Python", "C++", "HTML", "SQL"};
-
-    //printf("%?", *bermap);
    gamedata->map = (char **)malloc((10 + 1) * sizeof(char *));
-   printf("sizeof char *: %lu\n", sizeof(char *));
-   //namen = malloc(10 * sizeof(char));
-   printf("bermap %s\n", *bermap); 
-   printf("bermap %s\n", bermap[1]); 
-   printf("bermap %c\n", **bermap); 
-   printf("bermap %c\n", *(*(bermap + 5)+ 6)); 
-	printf("bermap %c\n", bermap[5][6]); 
 
     while (r < 10)
     {

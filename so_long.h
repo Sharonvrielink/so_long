@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/08 18:12:30 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/08 19:40:00 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,3 +67,4 @@ int32_t so_long(void);
 void    load_textimg(mlx_t *mlx, t_sprite *sprite);
 void    printsprite(mlx_t *mlx, mlx_image_t *sprite, int32_t x, int32_t y, int32_t depth);
 void    printmap(t_gamedata *gamedata);
+void	read_map(const char *map_file);

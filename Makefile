@@ -6,14 +6,14 @@
 #    By: svrielin <svrielin@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/09/07 14:21:16 by svrielin      #+#    #+#                  #
-#    Updated: 2022/09/08 18:11:01 by svrielin      ########   odam.nl          #
+#    Updated: 2022/09/08 21:12:56 by svrielin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	so_long
 CC				:=	gcc
-CFLAGS			?=	-Wall -Wextra -Werror 
-INCLUDE_FLAGS	?=	-I include -lglfw3 -framework Cocoa	-framework OpenGL -framework IOKit
+CFLAGS			?=-Wall -Wextra -Werror$(if $(DEBUG), -g -fsanitize=address)
+INCLUDE_FLAGS	?=-I include -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 #################################Project_files##################################
 SRC_DIR			:=	./src
 SRC_FILES		:=	so_long.c sprite_printer.c map_reader.c main.c
@@ -22,12 +22,7 @@ OBJ_FILES		:=	$(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 MLXDIR			:= ./MLX42
 LIBMLX42		:= $(MLXDIR)/libmlx42.a
 LIBFTDIR		:= ./libft
-LIBLIBFT		:= $(LIBFTDIR)/lifbt.a
-
-ifdef DEBUG
-CFLAGS	+=	-g
-NAME = so_long_debug
-endif
+LIBLIBFT		:= $(LIBFTDIR)/libft.a
 
 all: $(NAME)
 
@@ -44,24 +39,33 @@ $(NAME): $(OBJ_FILES) $(LIBMLX42) $(LIBLIBFT)
 # gcc -o: name of the output file
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 #	@echo "Object files and directory created"
 
 $(LIBMLX42):
-	make -C $(MLXDIR)
+	@$(MAKE) -C $(MLXDIR)
 
 $(LIBLIBFT):
-	make -C $(LIBFTDIR)
+	$(MAKE) -C $(LIBFTDIR)
 
 clean:
 	@rm -f $(OBJ_FILES) 
 	@rm -df $(OBJ_DIR)
+	$(MAKE) -C $(LIBFTDIR) clean
 	@echo "Object files and directory removed"
 
 fclean: clean
 	@rm -f $(NAME)
+	$(MAKE) -C $(LIBFTDIR) fclean
 	@echo "Library libft removed"
 
 re: fclean all
 
-.PHONY: clean fclean
+debug:
+	@$(MAKE) -C $(MLXDIR) DEBUG=1
+	@$(MAKE) DEBUG=1
+
+rebug: fclean
+	@$(MAKE) debug
+
+.PHONY: clean fclean debug rebug
