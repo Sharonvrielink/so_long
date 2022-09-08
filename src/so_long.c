@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/07 21:17:43 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/08 11:56:03 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void    load_textimg(mlx_t *mlx, t_sprite *sprite)
     sprite->exit_texture = mlx_load_png("textures/Flag.png");
     sprite->exit_img = mlx_texture_to_image(mlx, sprite->exit_texture);
     /*Fox*/
-    sprite->fox_texture = mlx_load_png("textures/Fox_Down.png");
-    sprite->fox_img = mlx_texture_to_image(mlx, sprite->fox_texture);
+    sprite->foxdown_texture = mlx_load_png("textures/Fox_Down.png");
+    sprite->fox_img = mlx_texture_to_image(mlx, sprite->foxdown_texture);
     sprite->foxup_texture = mlx_load_png("textures/Fox_Up.png");
     sprite->foxleft_texture = mlx_load_png("textures/Fox_Left.png");
     sprite->foxright_texture = mlx_load_png("textures/Fox_Right.png");
@@ -101,10 +101,7 @@ void    printmap(t_gamedata *gamedata)
             if (gamedata->map[y][x] == 'P')
                 printsprite(gamedata->mlx, gamedata->sprite.fox_img, (x * TILESIZE), (y * TILESIZE), 2);
             if (gamedata->map[y][x] == 'C')
-			{
                 printsprite(gamedata->mlx, gamedata->sprite.collectible_img, (x * TILESIZE), (y * TILESIZE), 1);
-				printf("Collectible x%d y%d\n", x, y);
-			}
             if (gamedata->map[y][x] == 'E')
                 printsprite(gamedata->mlx, gamedata->sprite.exit_img, (x * TILESIZE), (y * TILESIZE), 1);
             x++;
@@ -114,7 +111,7 @@ void    printmap(t_gamedata *gamedata)
     }
 }
 
-t_mapsprite    check_valid_move(t_gamedata *gamedata, t_direction direction)
+t_mapsprite    check_map_position(t_gamedata *gamedata, t_direction direction)
 {
     int32_t xtilepos;
     int32_t ytilepos;
@@ -129,7 +126,7 @@ t_mapsprite    check_valid_move(t_gamedata *gamedata, t_direction direction)
         xtilepos -= 1;
     if (direction == RIGHT)
         xtilepos += 1;
-	printf("New x pos = %d , y pos = %d\n", xtilepos, ytilepos);
+	printf("New x pos = %d , y pos = %d\n", xtilepos, ytilepos);//prints the position where the fox is going to
 	if (gamedata->map[ytilepos][xtilepos] == 'C') //d
 	{
 		printf("COLLECTIBLE\n");
@@ -139,6 +136,46 @@ t_mapsprite    check_valid_move(t_gamedata *gamedata, t_direction direction)
         return(WALL);
     else
     	return (SPACE);
+}
+
+mlx_texture_t	*choose_fox_texture(t_gamedata *gamedata, t_direction direction)
+{
+	if (direction == UP)
+		return(gamedata->sprite.foxup_texture);
+	else if (direction == DOWN)
+		return(gamedata->sprite.foxdown_texture);
+	else if (direction == LEFT)
+		return(gamedata->sprite.foxleft_texture);
+	else if (direction == RIGHT)
+		return(gamedata->sprite.foxright_texture);
+	return (NULL);
+}
+
+void	move_fox(t_gamedata *gamedata, t_direction direction)
+{
+	mlx_texture_t	*texture;
+	t_mapsprite		mapsprite;
+
+	mapsprite = check_map_position(gamedata, direction);
+
+	if (mapsprite != WALL)
+	{			
+		texture = choose_fox_texture(gamedata, direction);
+		mlx_draw_texture(gamedata->sprite.fox_img, texture, 0, 0);
+		
+    	if (direction == UP)
+			gamedata->sprite.fox_img->instances[0].y -= TILESIZE;
+		if (direction == DOWN)
+			gamedata->sprite.fox_img->instances[0].y += TILESIZE;
+		if (direction == LEFT)
+			gamedata->sprite.fox_img->instances[0].x -= TILESIZE;
+		if (direction == RIGHT)
+			gamedata->sprite.fox_img->instances[0].x += TILESIZE;	
+		gamedata->moves++;
+    	printf("Moves: %d\n", gamedata->moves);
+	}
+	if (mapsprite == COLLECTIBLE)
+		mlx_draw_texture(gamedata->sprite.collectible_img, gamedata->sprite.collected_texture, 0, 0);
 }
 
 void	move_fox_hook(void *param)
@@ -153,62 +190,13 @@ void	move_fox_hook(void *param)
         if (mlx_is_key_down(gamedata->mlx, MLX_KEY_ESCAPE))
             mlx_close_window(gamedata->mlx);
         if (mlx_is_key_down(gamedata->mlx, MLX_KEY_W))
-        {
-			
-            valid = check_valid_move(gamedata, UP);
-            if (valid != WALL)
-            {
-                mlx_draw_texture(gamedata->sprite.fox_img, gamedata->sprite.foxup_texture, 0, 0);
-                gamedata->sprite.fox_img->instances[0].y -= TILESIZE;
-                //printf("up\n");
-				if (valid == COLLECTIBLE)
-					mlx_draw_texture(gamedata->sprite.collectible_img, gamedata->sprite.collected_texture, 0, 0);
-                gamedata->moves++;
-                printf("Moves: %d\n", gamedata->moves);
-            }
-        }
+			move_fox(gamedata, UP);
         if (mlx_is_key_down(gamedata->mlx, MLX_KEY_S))
-        {
-            valid = check_valid_move(gamedata, DOWN);
-            if (valid != WALL)
-            {
-                mlx_draw_texture(gamedata->sprite.fox_img, gamedata->sprite.fox_texture, 0, 0);
-                gamedata->sprite.fox_img->instances[0].y += TILESIZE;
-                //printf("down\n");
-				if (valid == COLLECTIBLE)
-					mlx_draw_texture(gamedata->sprite.collectible_img, gamedata->sprite.collected_texture, 0, 0);
-                gamedata->moves++;
-                printf("Moves: %d\n", gamedata->moves);
-            }
-        }
+            move_fox(gamedata, DOWN);
         if (mlx_is_key_down(gamedata->mlx, MLX_KEY_A))
-        {
-            valid = check_valid_move(gamedata, LEFT);
-            if (valid != WALL)
-            {
-                mlx_draw_texture(gamedata->sprite.fox_img, gamedata->sprite.foxleft_texture, 0, 0);
-                gamedata->sprite.fox_img->instances[0].x -= TILESIZE;
-                //printf("left\n");
-				if (valid == COLLECTIBLE)
-					mlx_draw_texture(gamedata->sprite.collectible_img, gamedata->sprite.collected_texture, 0, 0);
-                gamedata->moves++;
-                printf("Moves: %d\n", gamedata->moves);
-            }
-        }
+            move_fox(gamedata, LEFT);
         if (mlx_is_key_down(gamedata->mlx, MLX_KEY_D))
-        {
-            valid = check_valid_move(gamedata, RIGHT);
-            if (valid != WALL)
-            {
-                mlx_draw_texture(gamedata->sprite.fox_img, gamedata->sprite.foxright_texture, 0, 0);
-                gamedata->sprite.fox_img->instances[0].x += TILESIZE;
-                //printf("right\n");
-				if (valid == COLLECTIBLE)
-					mlx_draw_texture(gamedata->sprite.collectible_img, gamedata->sprite.collected_texture, 0, 0);
-                gamedata->moves++;
-                printf("Moves: %d\n", gamedata->moves);
-            }
-        }
+            move_fox(gamedata, RIGHT);
         gamedata->frames = 0;
     }
     gamedata->frames++;

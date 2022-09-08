@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/07 19:23:32 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/08 10:49:02 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_sprite
 	mlx_texture_t	*collectible_texture;
     mlx_texture_t   *collected_texture;
 	mlx_texture_t	*exit_texture;
-    mlx_texture_t   *fox_texture;
+    mlx_texture_t   *foxdown_texture;
     mlx_texture_t   *foxup_texture;
     mlx_texture_t   *foxleft_texture;
     mlx_texture_t   *foxright_texture;
