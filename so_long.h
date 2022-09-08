@@ -6,11 +6,17 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/08 10:49:02 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/08 13:28:56 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MLX42/include/MLX42/MLX42.h"
+#include <stdlib.h>
+#include <stdio.h> // DON'T FORGET TO REMOVE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#include <string.h>
+#define WIDTH 640 //for test map 10 x 64
+#define HEIGHT 640 //for test map 10 x 64
+#define TILESIZE 64
 
 typedef enum e_mapsprite
 {
@@ -56,3 +62,6 @@ typedef struct s_gamedata
 }   t_gamedata;
 
 int32_t so_long(void);
+void    load_textimg(mlx_t *mlx, t_sprite *sprite);
+void    printsprite(mlx_t *mlx, mlx_image_t *sprite, int32_t x, int32_t y, int32_t depth);
+void    printmap(t_gamedata *gamedata);
