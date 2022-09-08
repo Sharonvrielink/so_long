@@ -6,7 +6,7 @@
 #    By: svrielin <svrielin@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/09/07 14:21:16 by svrielin      #+#    #+#                  #
-#    Updated: 2022/09/08 13:28:18 by svrielin      ########   odam.nl          #
+#    Updated: 2022/09/08 18:11:01 by svrielin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,13 @@ CFLAGS			?=	-Wall -Wextra -Werror
 INCLUDE_FLAGS	?=	-I include -lglfw3 -framework Cocoa	-framework OpenGL -framework IOKit
 #################################Project_files##################################
 SRC_DIR			:=	./src
-SRC_FILES		:=	so_long.c sprite_printer.c main.c
+SRC_FILES		:=	so_long.c sprite_printer.c map_reader.c main.c
 OBJ_DIR			:=	./obj
 OBJ_FILES		:=	$(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 MLXDIR			:= ./MLX42
 LIBMLX42		:= $(MLXDIR)/libmlx42.a
+LIBFTDIR		:= ./libft
+LIBLIBFT		:= $(LIBFTDIR)/lifbt.a
 
 ifdef DEBUG
 CFLAGS	+=	-g
@@ -32,7 +34,7 @@ all: $(NAME)
 # $@ filename of the target $^ all prerequisites
 # r: uses replacement for the objects files while inserting the files member into archive
 # c: create the library if it does not exist
-$(NAME): $(OBJ_FILES) $(LIBMLX42)
+$(NAME): $(OBJ_FILES) $(LIBMLX42) $(LIBLIBFT)
 	$(CC) $(CFLAGS) $(INCLUDE_FLAGS) $^ -o $(NAME)
 	@echo "Executable so_long is ready"
 
@@ -47,6 +49,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(LIBMLX42):
 	make -C $(MLXDIR)
+
+$(LIBLIBFT):
+	make -C $(LIBFTDIR)
 
 clean:
 	@rm -f $(OBJ_FILES) 
