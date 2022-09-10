@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/08 18:10:25 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/10 17:36:41 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/10 18:32:58 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,16 @@ void	read_map(const char *map_file, t_map *map)
 	if (fd == -1)
 		return ;
 	map->columnlen = load_into_lst(fd, &map_list);
+	printf("columnlen = %d\n", map->columnlen);
 	map->rowlen = ft_lstsize(map_list);
 	map->grid = malloc((map->rowlen + 1) * sizeof(char *));
 	while (row < (map->rowlen))
 	{
-		map->grid[row] = ft_strndup(map_list->content, map->columnlen - 1);
+		map->grid[row] = ft_strndup(map_list->content, map->columnlen);
 		map_list = map_list->next;
 		row++;
 	}
-	printtwodarray(map->grid, map->rowlen, (map->columnlen - 1)); //REMOVE LATER
+	printtwodarray(map->grid, map->rowlen, map->columnlen); //REMOVE LATER
 	ft_lstclear(&map_list, free);
 	return ;
 }
