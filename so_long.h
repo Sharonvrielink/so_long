@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/08 19:40:00 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/10 17:37:30 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,24 @@ typedef struct s_sprite
     mlx_image_t     *fox_img;
 }   t_sprite;
 
-typedef struct s_gamedata
+typedef struct s_map
+{
+	char	**grid;
+	int		columnlen;
+	int 	rowlen;
+}	t_map;
+
+typedef struct s_game
 {
     mlx_t       *mlx;
-    char        **map;
+    t_map		map;
     t_sprite    sprite;
     int32_t     frames;
     int32_t     moves;
-}   t_gamedata;
+}   t_game;
 
 int32_t so_long(void);
 void    load_textimg(mlx_t *mlx, t_sprite *sprite);
 void    printsprite(mlx_t *mlx, mlx_image_t *sprite, int32_t x, int32_t y, int32_t depth);
-void    printmap(t_gamedata *gamedata);
-void	read_map(const char *map_file);
+void    printmap(t_game *game);
+void	read_map(const char *map_file, t_map *map);

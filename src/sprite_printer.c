@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/08 13:24:24 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/08 19:59:07 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/10 17:42:09 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,48 +42,28 @@ void    printsprite(mlx_t *mlx, mlx_image_t *sprite, int32_t x, int32_t y, int32
     mlx_set_instance_depth(&sprite->instances[id], depth);
 }
 
-void    printmap(t_gamedata *gamedata)
+void    printmap(t_game *game)
 {
-    gamedata->frames = 0;
-    gamedata->moves = 0;
-    int r = 0;
-    //int c = 0;
-   // int z;
-    char *bermap[] = {
-        "1111111111", 
-        "1P00000001", 
-        "1000000001", 
-        "1000000001", 
-        "10000000C1", 
-        "1000000001", 
-        "1000000001", 
-        "10C0000001", 
-        "10000000E1", 
-        "1111111111"};
-        
-   gamedata->map = (char **)malloc((10 + 1) * sizeof(char *));
+    game->frames = 0;
+    game->moves = 0;
 
-    while (r < 10)
-    {
-        gamedata->map[r] = strdup(bermap[r]);
-        r++;
-    }
+	read_map("./maps/smallest_valid.ber", &game->map);
 
     int x = 0;
     int y = 0;
-    while (y < 10)
+    while (y < (game->map.rowlen))
     {
-        while (x < 10)
+        while (x < (game->map.columnlen))
         {
-            printsprite(gamedata->mlx, gamedata->sprite.space_img, (x * TILESIZE), (y * TILESIZE), 0);
-            if (gamedata->map[y][x] == '1')
-                printsprite(gamedata->mlx, gamedata->sprite.wall_img, (x * TILESIZE), (y * TILESIZE), 1);
-            if (gamedata->map[y][x] == 'P')
-                printsprite(gamedata->mlx, gamedata->sprite.fox_img, (x * TILESIZE), (y * TILESIZE), 2);
-            if (gamedata->map[y][x] == 'C')
-                printsprite(gamedata->mlx, gamedata->sprite.collectible_img, (x * TILESIZE), (y * TILESIZE), 1);
-            if (gamedata->map[y][x] == 'E')
-                printsprite(gamedata->mlx, gamedata->sprite.exit_img, (x * TILESIZE), (y * TILESIZE), 1);
+            printsprite(game->mlx, game->sprite.space_img, (x * TILESIZE), (y * TILESIZE), 0);
+            if (game->map.grid[y][x] == '1')
+                printsprite(game->mlx, game->sprite.wall_img, (x * TILESIZE), (y * TILESIZE), 1);
+            if (game->map.grid[y][x] == 'P')
+                printsprite(game->mlx, game->sprite.fox_img, (x * TILESIZE), (y * TILESIZE), 2);
+            if (game->map.grid[y][x] == 'C')
+                printsprite(game->mlx, game->sprite.collectible_img, (x * TILESIZE), (y * TILESIZE), 1);
+            if (game->map.grid[y][x] == 'E')
+                printsprite(game->mlx, game->sprite.exit_img, (x * TILESIZE), (y * TILESIZE), 1);
             x++;
         }
         y++;

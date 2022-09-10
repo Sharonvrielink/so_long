@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/09 18:58:48 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/10 17:41:26 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 #include "so_long.h"
 
-t_mapsprite    check_map_position(t_gamedata *gamedata, t_direction direction)
+t_mapsprite    check_map_position(t_game *game, t_direction direction)
 {
     int32_t xtilepos;
     int32_t ytilepos;
-    xtilepos = gamedata->sprite.fox_img->instances[0].x / TILESIZE;
-    ytilepos = gamedata->sprite.fox_img->instances[0].y / TILESIZE;
+    xtilepos = game->sprite.fox_img->instances[0].x / TILESIZE;
+    ytilepos = game->sprite.fox_img->instances[0].y / TILESIZE;
     printf("Previous x pos = %d , y pos = %d\n", xtilepos, ytilepos);//prints the position where the fox is coming from	
     if (direction == UP) 
         ytilepos -= 1;
@@ -30,76 +30,76 @@ t_mapsprite    check_map_position(t_gamedata *gamedata, t_direction direction)
     if (direction == RIGHT)
         xtilepos += 1;
 	printf("New x pos = %d , y pos = %d\n", xtilepos, ytilepos);//prints the position where the fox is going to
-	if (gamedata->map[ytilepos][xtilepos] == 'C') //d
+	if (game->map.grid[ytilepos][xtilepos] == 'C') //d
 	{
 		printf("COLLECTIBLE\n");
         return(COLLECTIBLE);
 	}
-    if (gamedata->map[ytilepos][xtilepos] == '1')
+    if (game->map.grid[ytilepos][xtilepos] == '1')
         return(WALL);
     else
     	return (SPACE);
 }
 
-mlx_texture_t	*choose_fox_texture(t_gamedata *gamedata, t_direction direction)
+mlx_texture_t	*choose_fox_texture(t_game *game, t_direction direction)
 {
 	if (direction == UP)
-		return(gamedata->sprite.foxup_texture);
+		return(game->sprite.foxup_texture);
 	else if (direction == DOWN)
-		return(gamedata->sprite.foxdown_texture);
+		return(game->sprite.foxdown_texture);
 	else if (direction == LEFT)
-		return(gamedata->sprite.foxleft_texture);
+		return(game->sprite.foxleft_texture);
 	else if (direction == RIGHT)
-		return(gamedata->sprite.foxright_texture);
+		return(game->sprite.foxright_texture);
 	return (NULL);
 }
 
-void	move_fox(t_gamedata *gamedata, t_direction direction)
+void	move_fox(t_game *game, t_direction direction)
 {
 	mlx_texture_t	*texture;
 	t_mapsprite		mapsprite;
 
-	mapsprite = check_map_position(gamedata, direction);
+	mapsprite = check_map_position(game, direction);
 
 	if (mapsprite != WALL)
 	{			
-		texture = choose_fox_texture(gamedata, direction);
-		mlx_draw_texture(gamedata->sprite.fox_img, texture, 0, 0);
+		texture = choose_fox_texture(game, direction);
+		mlx_draw_texture(game->sprite.fox_img, texture, 0, 0);
 		
     	if (direction == UP)
-			gamedata->sprite.fox_img->instances[0].y -= TILESIZE;
+			game->sprite.fox_img->instances[0].y -= TILESIZE;
 		if (direction == DOWN)
-			gamedata->sprite.fox_img->instances[0].y += TILESIZE;
+			game->sprite.fox_img->instances[0].y += TILESIZE;
 		if (direction == LEFT)
-			gamedata->sprite.fox_img->instances[0].x -= TILESIZE;
+			game->sprite.fox_img->instances[0].x -= TILESIZE;
 		if (direction == RIGHT)
-			gamedata->sprite.fox_img->instances[0].x += TILESIZE;	
-		gamedata->moves++;
-    	printf("Moves: %d\n", gamedata->moves);
+			game->sprite.fox_img->instances[0].x += TILESIZE;	
+		game->moves++;
+    	printf("Moves: %d\n", game->moves);
 	}
 	if (mapsprite == COLLECTIBLE)
-		mlx_draw_texture(gamedata->sprite.collectible_img, gamedata->sprite.collected_texture, 0, 0);
+		mlx_draw_texture(game->sprite.collectible_img, game->sprite.collected_texture, 0, 0);
 }
 
 void	move_fox_hook(void *param)
 {
-	t_gamedata  *gamedata;
-    gamedata = param;
-    if(gamedata->frames % 6 == 0)
+	t_game  *game;
+    game = param;
+    if(game->frames % 6 == 0)
     {
-        if (mlx_is_key_down(gamedata->mlx, MLX_KEY_ESCAPE))
-            mlx_close_window(gamedata->mlx);
-        if (mlx_is_key_down(gamedata->mlx, MLX_KEY_W))
-			move_fox(gamedata, UP);
-        if (mlx_is_key_down(gamedata->mlx, MLX_KEY_S))
-            move_fox(gamedata, DOWN);
-        if (mlx_is_key_down(gamedata->mlx, MLX_KEY_A))
-            move_fox(gamedata, LEFT);
-        if (mlx_is_key_down(gamedata->mlx, MLX_KEY_D))
-            move_fox(gamedata, RIGHT);
-        gamedata->frames = 0;
+        if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+            mlx_close_window(game->mlx);
+        if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+			move_fox(game, UP);
+        if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+            move_fox(game, DOWN);
+        if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+            move_fox(game, LEFT);
+        if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+            move_fox(game, RIGHT);
+        game->frames = 0;
     }
-    gamedata->frames++;
+    game->frames++;
 }
 
 void    delete_img(mlx_t *mlx, t_sprite *sprite)
@@ -113,17 +113,16 @@ void    delete_img(mlx_t *mlx, t_sprite *sprite)
 
 int32_t so_long(void)
 {
-    t_gamedata gamedata;
-	
-	read_map("./maps/smallest_valid.ber");
-    gamedata.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
-    if (!gamedata.mlx)
+    t_game game;
+
+    game.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
+    if (!game.mlx)
         exit(EXIT_FAILURE); //These exit statuses are defined in stdlib, failure is 1 success = 0 
-    load_textimg(gamedata.mlx, &gamedata.sprite);
-    printmap(&gamedata);
-    mlx_loop_hook(gamedata.mlx, &move_fox_hook, &gamedata);
-    mlx_loop(gamedata.mlx); //Rendering of mlx, which loops until the window is closed
-    delete_img(gamedata.mlx, &gamedata.sprite);
-	mlx_terminate(gamedata.mlx);
+    load_textimg(game.mlx, &game.sprite);
+    printmap(&game);
+    mlx_loop_hook(game.mlx, &move_fox_hook, &game);
+    mlx_loop(game.mlx); //Rendering of mlx, which loops until the window is closed
+    delete_img(game.mlx, &game.sprite);
+	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }

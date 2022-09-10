@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/08 18:10:25 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/10 15:51:32 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/10 17:36:41 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	print_lst(t_list *lst)
 		lst = lst->next;
 	}
 }
+
 int	load_into_lst(int fd, t_list **map_list)
 {
 	size_t	columnlen;
@@ -71,31 +72,30 @@ void	printtwodarray(char **twod_array, int rowlen, int columnlen)
 	}
 }
 	
-void	read_map(const char *map_file)
+void	read_map(const char *map_file, t_map *map)
 {
-	int fd;
-	int columnlen;
-	int rowlen;
-	int row;
-	int column;
-	t_list *map_list;
-	char **testmap;
+	int		fd;
+	int		row;
+	int		column;
+	t_list	*map_list;
 	
 	map_list = NULL;
 	row = 0;
 	column = 0;
+	
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
 		return ;
-	columnlen = load_into_lst(fd, &map_list);
-	rowlen = ft_lstsize(map_list);
-	testmap = malloc((rowlen + 1) * sizeof(char *));
-	while (row < rowlen)
+	map->columnlen = load_into_lst(fd, &map_list);
+	map->rowlen = ft_lstsize(map_list);
+	map->grid = malloc((map->rowlen + 1) * sizeof(char *));
+	while (row < (map->rowlen))
 	{
-		testmap[row] = ft_strndup(map_list->content, columnlen - 1);
+		map->grid[row] = ft_strndup(map_list->content, map->columnlen - 1);
 		map_list = map_list->next;
 		row++;
 	}
-	printtwodarray(testmap, rowlen, (columnlen - 1));
+	printtwodarray(map->grid, map->rowlen, (map->columnlen - 1)); //REMOVE LATER
 	ft_lstclear(&map_list, free);
+	return ;
 }
