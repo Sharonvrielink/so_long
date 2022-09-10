@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/10 17:41:26 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/10 19:22:03 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,17 @@ void    delete_img(mlx_t *mlx, t_sprite *sprite)
 
 int32_t so_long(void)
 {
-    t_game game;
-
-    game.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
+    t_game	game;
+	int32_t	widht;
+	int32_t	height;
+	int32_t	*screenwidht;
+	int32_t	*screenheight;
+	
+	void mlx_get_monitor_size(int32_t index, int32_t* width, int32_t* height);
+	read_map("./maps/toobig.ber", &game.map);
+	widht = game.map.columnlen * TILESIZE; //40 tiles
+	height = game.map.rowlen * TILESIZE;
+    game.mlx = mlx_init(widht, height, "MLX42", true);
     if (!game.mlx)
         exit(EXIT_FAILURE); //These exit statuses are defined in stdlib, failure is 1 success = 0 
     load_textimg(game.mlx, &game.sprite);

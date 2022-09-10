@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/08 13:24:24 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/10 17:42:09 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/10 18:49:15 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void    printmap(t_game *game)
 {
     game->frames = 0;
     game->moves = 0;
-
-	read_map("./maps/smallest_valid.ber", &game->map);
 
     int x = 0;
     int y = 0;
