@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/10 17:37:30 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/11 15:37:45 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include <stdio.h> // DON'T FORGET TO REMOVE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #include <string.h>
 #include <fcntl.h>
-#define WIDTH 640 //for test map 10 x 64
-#define HEIGHT 640 //for test map 10 x 64
 #define TILESIZE 64
 
 typedef enum e_mapsprite
