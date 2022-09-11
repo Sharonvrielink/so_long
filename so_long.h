@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/11 15:37:45 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/11 19:49:22 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ typedef enum e_mapsprite
 {
 	SPACE,
 	WALL,
-	COLLECTIBLE,
+	PLAYER,
+	COLL,
 	EXIT,
 } t_mapsprite;
 
@@ -38,6 +39,8 @@ typedef struct s_sprite
 {
 	mlx_texture_t	*space_texture;
 	mlx_texture_t	*wall_texture;
+	mlx_texture_t	*rosewall_texture;
+	mlx_texture_t	*bush_texture;
 	mlx_texture_t	*collectible_texture;
     mlx_texture_t   *collected_texture;
 	mlx_texture_t	*exit_texture;
@@ -47,6 +50,8 @@ typedef struct s_sprite
     mlx_texture_t   *foxright_texture;
     mlx_image_t     *space_img;
     mlx_image_t     *wall_img;
+	mlx_image_t		*rosewall_img;
+	mlx_image_t		*bush_img;
     mlx_image_t     *collectible_img;
     mlx_image_t     *exit_img;
     mlx_image_t     *fox_img;
@@ -70,6 +75,6 @@ typedef struct s_game
 
 int32_t so_long(void);
 void    load_textimg(mlx_t *mlx, t_sprite *sprite);
-void    printsprite(mlx_t *mlx, mlx_image_t *sprite, int32_t x, int32_t y, int32_t depth);
+void    printsprite(t_game *game, t_mapsprite mapsprite, int32_t x, int32_t y);
 void    printmap(t_game *game);
 void	read_map(const char *map_file, t_map *map);

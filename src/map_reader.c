@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/08 18:10:25 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/10 18:55:06 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/11 16:45:26 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	load_into_lst(int fd, t_list **map_list)
 		if (columnlen != prev_columnlen)
 		{
 			ft_lstclear(map_list, free);
-			return (-1);
+			return (-1); //Error: map is not rectangular
 		}
 		line = get_next_line(fd);
 		if (line)
@@ -83,9 +83,8 @@ void	read_map(const char *map_file, t_map *map)
 	column = 0;
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
-		return ;
+		return ; //Error: check map path, could not open the map file
 	map->columnlen = load_into_lst(fd, &map_list);
-	printf("columnlen = %d\n", map->columnlen);
 	map->rowlen = ft_lstsize(map_list);
 	map->grid = malloc((map->rowlen + 1) * sizeof(char *));
 	while (row < (map->rowlen))
@@ -94,7 +93,6 @@ void	read_map(const char *map_file, t_map *map)
 		map_list = map_list->next;
 		row++;
 	}
-	//printtwodarray(map->grid, map->rowlen, map->columnlen); //REMOVE LATER
 	ft_lstclear(&map_list, free);
 	return ;
 }

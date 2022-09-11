@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/11 15:51:31 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/11 19:09:43 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_mapsprite    check_map_position(t_game *game, t_direction direction)
 	if (game->map.grid[ytilepos][xtilepos] == 'C') //d
 	{
 		printf("COLLECTIBLE\n");
-        return(COLLECTIBLE);
+        return(COLL);
 	}
     if (game->map.grid[ytilepos][xtilepos] == '1')
         return(WALL);
@@ -77,7 +77,7 @@ void	move_fox(t_game *game, t_direction direction)
 		game->moves++;
     	printf("Moves: %d\n", game->moves);
 	}
-	if (mapsprite == COLLECTIBLE)
+	if (mapsprite == COLL)
 		mlx_draw_texture(game->sprite.collectible_img, game->sprite.collected_texture, 0, 0);
 }
 
@@ -106,6 +106,7 @@ void    delete_img(mlx_t *mlx, t_sprite *sprite)
 {
     mlx_delete_image(mlx, sprite->space_img); //Cleanup the image after exit
     mlx_delete_image(mlx, sprite->wall_img);
+	mlx_delete_image(mlx, sprite->bush_img);
     mlx_delete_image(mlx, sprite->collectible_img);
     mlx_delete_image(mlx, sprite->exit_img);
     mlx_delete_image(mlx, sprite->fox_img);

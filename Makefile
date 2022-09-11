@@ -6,13 +6,13 @@
 #    By: svrielin <svrielin@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/09/07 14:21:16 by svrielin      #+#    #+#                  #
-#    Updated: 2022/09/08 21:12:56 by svrielin      ########   odam.nl          #
+#    Updated: 2022/09/11 19:15:20 by svrielin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	so_long
 CC				:=	gcc
-CFLAGS			?=-Wall -Wextra -Werror$(if $(DEBUG), -g -fsanitize=address)
+CFLAGS			?=-Wall -Wextra -Werror$(if $(DEBUG), -g)
 INCLUDE_FLAGS	?=-I include -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 #################################Project_files##################################
 SRC_DIR			:=	./src
