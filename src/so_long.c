@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/10 21:19:30 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/11 14:15:36 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,13 @@ void    delete_img(mlx_t *mlx, t_sprite *sprite)
 int32_t so_long(void)
 {
     t_game	game;
-	int32_t	width = 64;
-	int32_t	height = 64;
-	int32_t	*screenwidth =  &width;
-	int32_t	*screenheight = &height;
+	int32_t	width;
+	int32_t	height;
 	
-	mlx_get_monitor_size(0, screenwidth, screenheight);
-	printf("screenwidth = %d, screenheight %d\n", *screenwidth, *screenheight);
+	width = 0;
+	height = 0;
+	mlx_get_monitor_size(0, &width, &height);
+	printf("screenwidth = %d, screenheight %d\n", width, height);
 	read_map("./maps/toobig.ber", &game.map);
 	width = game.map.columnlen * TILESIZE; //40 tiles
 	height = game.map.rowlen * TILESIZE;
