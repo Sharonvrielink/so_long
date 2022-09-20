@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/11 19:09:43 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/20 21:07:10 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,11 @@ void	move_fox(t_game *game, t_direction direction)
     	printf("Moves: %d\n", game->moves);
 	}
 	if (mapsprite == COLL)
+	{
 		mlx_draw_texture(game->sprite.collectible_img, game->sprite.collected_texture, 0, 0);
+		printf("sprite.collectible_img->instances[0].x = %d\n", (game->sprite.collectible_img->instances[0].x / TILESIZE)); //tried to figure out the different instances
+		printf("sprite.collectible_img->instances[0].x = %d\n", (game->sprite.collectible_img->instances[1].x / TILESIZE));
+	}
 }
 
 void	move_fox_hook(void *param)
