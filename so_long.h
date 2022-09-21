@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/21 13:53:26 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/21 16:04:20 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_sprite
 	mlx_image_t		*rosewall_img;
 	mlx_image_t		*bush_img;
     mlx_image_t     *collectible_img;
+	mlx_image_t		*collected_img;
     mlx_image_t     *exit_img;
     mlx_image_t     *fox_img;
 }   t_sprite;
@@ -70,12 +71,19 @@ typedef struct s_game
     t_map		map;
     t_sprite    sprite;
 	int32_t		total_collectibles;
+	int32_t		collected;
     int32_t     frames;
     int32_t     moves;
 }   t_game;
 
-int32_t so_long(void);
-void    load_textimg(mlx_t *mlx, t_sprite *sprite);
-void    printsprite(t_game *game, t_mapsprite mapsprite, int32_t x, int32_t y);
-void    printmap(t_game *game);
-void	read_map(const char *map_file, t_map *map);
+int32_t 		so_long(void);
+void    		load_textures(t_sprite *sprite);
+void			load_images(mlx_t *mlx, t_sprite *sprite);
+void    		printsprite(t_game *game, t_mapsprite mapsprite, int32_t x, int32_t y);
+void    		printmap(t_game *game);
+void			read_map(const char *map_file, t_map *map);
+void			move_fox_hook(void *param);
+void			move_fox(t_game *game, t_direction direction);
+void			get_collectible(t_game *game, mlx_instance_t *collinstance, int32_t x, int32_t y);
+mlx_texture_t	*choose_fox_texture(t_game *game, t_direction direction);
+t_mapsprite    check_next_map_position(t_game *game, t_direction direction);

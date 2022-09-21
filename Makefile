@@ -6,17 +6,17 @@
 #    By: svrielin <svrielin@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/09/07 14:21:16 by svrielin      #+#    #+#                  #
-#    Updated: 2022/09/11 19:15:20 by svrielin      ########   odam.nl          #
+#    Updated: 2022/09/21 17:14:46 by svrielin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	so_long
 CC				:=	gcc
-CFLAGS			?=-Wall -Wextra -Werror$(if $(DEBUG), -g)
+CFLAGS			?=-Wall -Wextra -Werror$(if $(DEBUG), -g)$(if $(FSAN), -g -fsanitize=address)
 INCLUDE_FLAGS	?=-I include -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 #################################Project_files##################################
 SRC_DIR			:=	./src
-SRC_FILES		:=	so_long.c sprite_printer.c map_reader.c main.c
+SRC_FILES		:=	so_long.c sprite_printer.c sprite_printer_utils.c map_reader.c move_player.c main.c
 OBJ_DIR			:=	./obj
 OBJ_FILES		:=	$(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 MLXDIR			:= ./MLX42
@@ -67,5 +67,12 @@ debug:
 
 rebug: fclean
 	@$(MAKE) debug
+	
+fsan:
+	@$(MAKE) -C $(MLXDIR) FSAN=1
+	@$(MAKE) FSAN=1
+
+refsan: fclean
+	@$(MAKE) fsan
 
 .PHONY: clean fclean debug rebug
