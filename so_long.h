@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/11 19:49:22 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/21 13:53:26 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_game
     mlx_t       *mlx;
     t_map		map;
     t_sprite    sprite;
+	int32_t		total_collectibles;
     int32_t     frames;
     int32_t     moves;
 }   t_game;

@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/08 13:24:24 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/11 19:49:52 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/21 13:55:30 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,11 @@ void	check_mapsprite(t_game *game, char c, int x, int y)
     if (c == 'P')
         printsprite(game, PLAYER, xpos, ypos);
     if (c == 'C')
+	{
         printsprite(game, COLL, xpos, ypos);
+		game->total_collectibles += 1;
+		printf("Count collectibles %d\n", game->total_collectibles);
+	}
     if (c == 'E')
         printsprite(game, EXIT, xpos, ypos);
 }
@@ -140,6 +144,7 @@ void    printmap(t_game *game)
 
     int x = 0;
     int y = 0;
+	game->total_collectibles = 0;
     while (y < (game->map.rowlen))
     {
         while (x < (game->map.columnlen))

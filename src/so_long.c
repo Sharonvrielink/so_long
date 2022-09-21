@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/20 21:07:10 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/21 14:01:03 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "so_long.h"
 
-t_mapsprite    check_map_position(t_game *game, t_direction direction)
+t_mapsprite    check_next_map_position(t_game *game, t_direction direction)
 {
     int32_t xtilepos;
     int32_t ytilepos;
@@ -54,12 +54,30 @@ mlx_texture_t	*choose_fox_texture(t_game *game, t_direction direction)
 	return (NULL);
 }
 
+void	get_collectible(t_game *game, mlx_instance_t *collinstance, int32_t x, int32_t y)
+{
+	int i; 
+
+	i = 0;
+	printf("Total collectibles: %d\n", game->total_collectibles);
+	printf("x = %d, y = %d\n", x, y);
+	while (i < (game->total_collectibles))
+	{
+		printf("Collectible pos x = %d, collectible pos y = %d\n", collinstance[i].x, collinstance[i].y);
+		if (collinstance[i].x == x && collinstance[i].y == y)
+		{
+			collinstance[i].enabled = false;
+		}
+		i++;
+	}
+}
+
 void	move_fox(t_game *game, t_direction direction)
 {
 	mlx_texture_t	*texture;
 	t_mapsprite		mapsprite;
 
-	mapsprite = check_map_position(game, direction);
+	mapsprite = check_next_map_position(game, direction);
 
 	if (mapsprite != WALL)
 	{			
@@ -79,9 +97,10 @@ void	move_fox(t_game *game, t_direction direction)
 	}
 	if (mapsprite == COLL)
 	{
-		mlx_draw_texture(game->sprite.collectible_img, game->sprite.collected_texture, 0, 0);
+		get_collectible(game, game->sprite.collectible_img->instances, game->sprite.fox_img->instances[0].x, game->sprite.fox_img->instances[0].y);
+		//mlx_draw_texture(game->sprite.collectible_img, game->sprite.collected_texture, 0, 0);
 		printf("sprite.collectible_img->instances[0].x = %d\n", (game->sprite.collectible_img->instances[0].x / TILESIZE)); //tried to figure out the different instances
-		printf("sprite.collectible_img->instances[0].x = %d\n", (game->sprite.collectible_img->instances[1].x / TILESIZE));
+		printf("sprite.collectible_img->instances[1].x = %d\n", (game->sprite.collectible_img->instances[1].x / TILESIZE));
 	}
 }
 
