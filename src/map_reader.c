@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/08 18:10:25 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/22 21:39:26 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/22 21:41:10 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	load_into_lst(int fd, t_list **map_list)
 	return (columnlen);
 }
 
-void	construct_map_data(t_map *map, t_list **map_list, int fd)cd 
+void	construct_map_data(t_map *map, t_list **map_list, int fd)
 {
 	int		row;
 
