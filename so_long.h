@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/22 18:41:36 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/22 21:33:58 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdio.h> // DON'T FORGET TO REMOVE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #include <string.h>
 #include <fcntl.h>
+#include <unistd.h>
 #define TILESIZE 64
 
 typedef enum e_mapsprite
@@ -44,6 +45,7 @@ typedef enum e_error
 	MAP_EXIT, //map should contain 1 exit
 	MAP_COLL, //map should contain at least 1 collectible
 	MAP_TOOBIG, //map too big for current screen size
+	MAP_NORECTANGLE, //map is not rectangular
 }	t_error;
 
 typedef struct s_sprite
@@ -107,5 +109,6 @@ void			get_collectible(t_game *game, mlx_instance_t *collinstance, int32_t x, in
 void			check_valid_map(t_map *map);
 mlx_texture_t	*choose_fox_texture(t_game *game, t_direction direction);
 t_mapsprite		check_next_map_position(t_game *game, t_direction direction);
-int				so_long_error(t_error errorcode, t_game *game);
+int				so_long_error_free(t_error code, t_game *game);
+int				so_long_error(t_error errorcode, t_map *map);
 void    		delete_img(mlx_t *mlx, t_sprite *sprite);

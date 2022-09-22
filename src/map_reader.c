@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/08 18:10:25 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/22 14:51:46 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/22 21:39:26 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	load_into_lst(int fd, t_list **map_list)
 		if (columnlen != prev_columnlen)
 		{
 			ft_lstclear(map_list, free);
-			return (-1); //Error: map is not rectangular
+			return (so_long_error(MAP_NORECTANGLE, NULL)); //Error: map is not rectangular
 		}
 		line = get_next_line(fd);
 		if (line)
@@ -50,28 +50,34 @@ int	load_into_lst(int fd, t_list **map_list)
 	return (columnlen);
 }
 
+void	construct_map_data(t_map *map, t_list **map_list, int fd)cd 
+{
+	int		row;
+
+	row = 0;
+	map->columnlen = load_into_lst(fd, map_list);
+	map->rowlen = ft_lstsize(*map_list);
+	map->grid = malloc((map->rowlen + 1) * sizeof(char *));
+	if (!map->grid)
+		return ;
+	while (row < (map->rowlen))
+	{
+		map->grid[row] = ft_strndup((*map_list)->content, map->columnlen);
+		map_list = &(*map_list)->next;
+		row++;
+	}
+}
+
 void	read_map(const char *map_file, t_map *map)
 {
 	int		fd;
-	int		row;
-	int		column;
 	t_list	*map_list;
 
 	map_list = NULL;
-	row = 0;
-	column = 0;
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
 		return ; //Error: check map path, could not open the map file
-	map->columnlen = load_into_lst(fd, &map_list);
-	map->rowlen = ft_lstsize(map_list);
-	map->grid = malloc((map->rowlen + 1) * sizeof(char *));
-	while (row < (map->rowlen))
-	{
-		map->grid[row] = ft_strndup(map_list->content, map->columnlen);
-		map_list = map_list->next;
-		row++;
-	}
+	construct_map_data(map, &map_list, fd);
 	ft_lstclear(&map_list, free);
 	check_valid_map(map);
 	return ;

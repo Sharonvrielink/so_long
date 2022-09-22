@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 14:51:33 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/22 18:32:34 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/22 19:57:43 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ bool	check_all_wall(char *row)
 	return true;
 }
 
-void	check_row(char *row, int rowlen, t_entity *entity)
+void	check_row(char *row, t_map *map, t_entity *entity)
 {
 	int i;
 
 	i = 0;
-	if(row[0] != '1' && row[rowlen] != '1')
-		so_long_error(MAP_WALLS, NULL); //Error not surrounded by walls
+	if(row[0] != '1' && row[map->rowlen] != '1')
+		so_long_error(MAP_WALLS, map); //Error not surrounded by walls
 	while(row[i] != '\0')
 	{
 		if (valid_char(row[i]) == false)
-			so_long_error(MAP_CHAR, NULL);
+			so_long_error(MAP_CHAR, map);
 		if (row[i] == 'P') //should I check for 'P' and 'p'?
 			entity->player++;
 		else if (row[i] == 'E')
@@ -53,16 +53,18 @@ void	check_row(char *row, int rowlen, t_entity *entity)
 			entity->collectible++;
 		i++;
 	}
+	return ;
 }
 
-void	check_entities(t_entity *entity)
+void	check_entities(t_entity *entity, t_map *map)
 {
 	if (entity->player != 1)
-		so_long_error(MAP_PLAYER, NULL);
+		so_long_error(MAP_PLAYER, map);
 	if (entity->exit != 1)
-		so_long_error(MAP_EXIT, NULL);
+		so_long_error(MAP_EXIT, map);
 	if (entity->collectible < 1)
-		so_long_error(MAP_COLL, NULL);
+		so_long_error(MAP_COLL, map);
+	return ;
 }
 
 void	check_valid_map(t_map *map)
@@ -73,18 +75,18 @@ void	check_valid_map(t_map *map)
 	entity.exit = 0;
 	entity.collectible = 0;
 	row = 0;
-	while (row < (map->rowlen))
+	while (row < map->rowlen)
 	{
-		if (row == 0 || row == (map->rowlen - 1))
+		if (row == 0 || row == map->rowlen - 1)
 		{
 			if (check_all_wall(map->grid[row]) == false)
-				so_long_error(MAP_WALLS, NULL);
+				so_long_error(MAP_WALLS, map);
 		}
 		else
-			check_row(map->grid[row], map->rowlen, &entity);
+			check_row(map->grid[row], map, &entity);
 		row++;
 	}
-	check_entities(&entity);
+	return (check_entities(&entity, map));
 }
 
 	//check if there are no other characters than 0/1/P/E/C

@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 14:18:03 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/22 18:58:06 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/22 21:35:37 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,36 @@
 char *error_messages(t_error errorcode)
 {
 	char	*message[] = {
-		"Exit: Succes!\n",
+		"Exit: congratulations you won the game!\n",
 		"Error: map invalid, not surrounded by walls\n",
 		"Error: map invalid, invalid char found\n",
 		"Error: map invalid, map should contain 1 player\n",
 		"Error: map invalid, map should contain 1 exit\n",
 		"Error: map invalid, map should contain 1 or more collectibles\n",
 		"Error: map invalid, too big for current screen size\n",
+		"Error: map invalid, map is not rectangular\n",
 	};
 	return (message[errorcode]);
 }
 
-int	so_long_error(t_error errorcode, t_game *game)
+int		so_long_error_free(t_error code, t_game *game)
 {
-	ft_putstr_fd(error_messages(errorcode), 1);
-	if (game != NULL)
+	delete_img(game->mlx, &game->sprite);
+	mlx_terminate(game->mlx);
+	return (so_long_error(code, &game->map));
+}
+
+int	so_long_error(t_error code, t_map *map)
+{
+	int row = 0;
+	while (row < map->rowlen)
 	{
-		delete_img(game->mlx, &game->sprite);
-		mlx_terminate(game->mlx);
+		free(map->grid[row]);
+		row++;
 	}
-	exit(EXIT_FAILURE);
+	ft_putstr_fd(error_messages(code), STDERR_FILENO);
+	if (code == SUCCES)
+		exit(EXIT_SUCCESS);
+	else
+		exit(EXIT_FAILURE);
 }

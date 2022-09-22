@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/22 18:39:17 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/22 21:29:23 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,21 @@ void	window_init(t_game *game, const char *map_file)
         exit(EXIT_FAILURE); //These exit statuses are defined in stdlib, failure is 1 success = 0 
 	mlx_get_monitor_size(0, &screenwidth, &screenheight);
 	if (screenwidth < mapwidth || screenheight < mapheight)
-		so_long_error(MAP_TOOBIG, game);
+		so_long_error_free(MAP_TOOBIG, game);
 }
-
+void	checkleaks(void)
+{
+	system("leaks so_long");
+}
 int32_t so_long(const char *map_file)
 {
     t_game	game;
+	//atexit(&checkleaks);
 	window_init(&game, map_file);
     load_textures(&game.sprite);
 	load_images(game.mlx, &game.sprite);
     printmap(&game);
     mlx_loop_hook(game.mlx, &move_fox_hook, &game);
     mlx_loop(game.mlx); //Rendering of mlx, which loops until the window is closed
-    delete_img(game.mlx, &game.sprite);
-	mlx_terminate(game.mlx);
-	return (EXIT_SUCCESS);
+	return (so_long_error_free(SUCCES, &game)); //!!!!! Need to make a difference between won the game and exit the game
 }
