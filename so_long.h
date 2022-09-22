@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/22 18:37:35 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/22 18:41:36 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef enum e_error
 	MAP_PLAYER, //map should contain 1 player
 	MAP_EXIT, //map should contain 1 exit
 	MAP_COLL, //map should contain at least 1 collectible
-	MAP_TOOBIG,
+	MAP_TOOBIG, //map too big for current screen size
 }	t_error;
 
 typedef struct s_sprite
