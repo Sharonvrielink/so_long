@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/21 16:04:20 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/22 09:56:52 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ typedef struct s_game
     int32_t     moves;
 }   t_game;
 
-int32_t 		so_long(void);
+int32_t 		so_long(const char *map_file);
+void			window_init(t_game *game, const char *map_file);
 void    		load_textures(t_sprite *sprite);
 void			load_images(mlx_t *mlx, t_sprite *sprite);
 void    		printsprite(t_game *game, t_mapsprite mapsprite, int32_t x, int32_t y);

@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/01 13:09:30 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/07 17:02:38 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/22 10:03:53 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 #include "so_long.h"
 
-int32_t main(void)
+int32_t main(int argc, char **argv)
 {
-    so_long();
+	if (argc < 2 || argc > 2)
+		printf("Give 1 path to file map\n");
+	else
+    	so_long(argv[1]);
 }
