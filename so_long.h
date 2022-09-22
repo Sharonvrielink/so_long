@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/22 14:49:40 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/22 18:37:35 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ typedef enum e_error
 	SUCCES,
 	MAP_WALLS, //map not surrounded by walls
 	MAP_CHAR, //unvalid character
+	MAP_PLAYER, //map should contain 1 player
+	MAP_EXIT, //map should contain 1 exit
+	MAP_COLL, //map should contain at least 1 collectible
+	MAP_TOOBIG,
 }	t_error;
 
 typedef struct s_sprite
@@ -103,4 +107,5 @@ void			get_collectible(t_game *game, mlx_instance_t *collinstance, int32_t x, in
 void			check_valid_map(t_map *map);
 mlx_texture_t	*choose_fox_texture(t_game *game, t_direction direction);
 t_mapsprite		check_next_map_position(t_game *game, t_direction direction);
-int				so_long_error(t_error errorcode);
+int				so_long_error(t_error errorcode, t_game *game);
+void    		delete_img(mlx_t *mlx, t_sprite *sprite);
