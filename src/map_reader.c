@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/08 18:10:25 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/11 16:45:26 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/22 14:51:46 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,27 +50,6 @@ int	load_into_lst(int fd, t_list **map_list)
 	return (columnlen);
 }
 
-void	printtwodarray(char **twod_array, int rowlen, int columnlen)
-{
-	int	row;
-	int	column;
-
-	row = 0;
-	column = 0;
-	printf("\n");
-	while (row < rowlen)
-	{
-		while (column < ((int)columnlen))
-		{
-			printf("[%c]", twod_array[row][column]);
-			column++;
-		}
-		printf("\n");
-		column = 0;
-		row++;
-	}
-}
-
 void	read_map(const char *map_file, t_map *map)
 {
 	int		fd;
@@ -94,5 +73,6 @@ void	read_map(const char *map_file, t_map *map)
 		row++;
 	}
 	ft_lstclear(&map_list, free);
+	check_valid_map(map);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/22 09:56:52 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/09/22 14:49:40 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ typedef enum e_direction
     RIGHT,
 } t_direction;
 
+typedef enum e_error
+{
+	SUCCES,
+	MAP_WALLS, //map not surrounded by walls
+	MAP_CHAR, //unvalid character
+}	t_error;
+
 typedef struct s_sprite
 {
 	mlx_texture_t	*space_texture;
@@ -57,6 +64,13 @@ typedef struct s_sprite
     mlx_image_t     *exit_img;
     mlx_image_t     *fox_img;
 }   t_sprite;
+
+typedef struct s_check_entity
+{
+	int	player;
+	int	exit;
+	int	collectible;
+}	t_entity;
 
 typedef struct s_map
 {
@@ -86,5 +100,7 @@ void			read_map(const char *map_file, t_map *map);
 void			move_fox_hook(void *param);
 void			move_fox(t_game *game, t_direction direction);
 void			get_collectible(t_game *game, mlx_instance_t *collinstance, int32_t x, int32_t y);
+void			check_valid_map(t_map *map);
 mlx_texture_t	*choose_fox_texture(t_game *game, t_direction direction);
-t_mapsprite    check_next_map_position(t_game *game, t_direction direction);
+t_mapsprite		check_next_map_position(t_game *game, t_direction direction);
+int				so_long_error(t_error errorcode);
