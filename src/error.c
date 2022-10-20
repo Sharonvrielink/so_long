@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 14:18:03 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/22 21:35:37 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/10/20 11:42:45 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char *error_messages(t_error errorcode)
 		"Error: map invalid, map should contain 1 player\n",
 		"Error: map invalid, map should contain 1 exit\n",
 		"Error: map invalid, map should contain 1 or more collectibles\n",
+		"Error: map does not have a valid path\n",
 		"Error: map invalid, too big for current screen size\n",
 		"Error: map invalid, map is not rectangular\n",
 	};

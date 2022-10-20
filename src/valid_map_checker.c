@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 14:51:33 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/22 19:57:43 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/10/20 10:40:00 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void	check_valid_map(t_map *map)
 			check_row(map->grid[row], map, &entity);
 		row++;
 	}
-	return (check_entities(&entity, map));
+	check_entities(&entity, map);
+	return (check_valid_path(map));
 }
 
 	//check if there are no other characters than 0/1/P/E/C

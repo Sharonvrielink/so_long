@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/08 18:10:25 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/22 21:41:10 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/10/20 09:43:01 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	construct_map_data(t_map *map, t_list **map_list, int fd)
 	row = 0;
 	map->columnlen = load_into_lst(fd, map_list);
 	map->rowlen = ft_lstsize(*map_list);
-	map->grid = malloc((map->rowlen + 1) * sizeof(char *));
+	map->grid = malloc((map->rowlen) * sizeof(char *)); //first: map->grid = malloc((map->rowlen + 1) * sizeof(char *));
 	if (!map->grid)
 		return ;
 	while (row < (map->rowlen))
