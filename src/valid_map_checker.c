@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 14:51:33 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/10/30 14:56:48 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/10/30 15:49:46 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void	check_row(char *row, t_map *map, t_entity *entity)
 
 	i = 0;
 	if(row[0] != '1' && row[map->rowlen] != '1')
-		so_long_error(MAP_WALLS, map); //Error not surrounded by walls
+		so_long_error(MAP_WALLS, map);
 	while(row[i] != '\0')
 	{
 		if (valid_char(row[i]) == false)
 			so_long_error(MAP_CHAR, map);
-		if (row[i] == 'P') //should I check for 'P' and 'p'?
+		if (row[i] == 'P')
 			entity->player++;
 		else if (row[i] == 'E')
 			entity->exit++;
@@ -90,10 +90,3 @@ void	check_valid_map(t_map *map)
 	check_entities(&entity, map);
 	return (check_valid_path(map));
 }
-
-	//check if there are no other characters than 0/1/P/E/C
-	//check if the map is surrounded by walls
-	//check if there is 1 player
-	//check if there is 1 exit
-	//check if there's 1 or more collectibles
-	//check if there's a valid path in the map

@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 19:02:05 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/10/30 15:29:43 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/10/30 15:49:59 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,27 +129,3 @@ void check_valid_path(t_map *map)
 	if(reached.exit != 1)
 		so_long_error(MAP_PATH, map);
 }
-
-// First attemt, works but way too slow
-// bool find_path(int row, int col, t_map *map, char **gridcopy)
-// {
-// 	//Check if the exit is reached
-// 	if(row == map->exitrow && col == map->exitcolumn)
-// 		return true;
-// 	if(row > 0 && col > 0 && row < (map->rowlen - 1) && col < (map->columnlen - 1) && gridcopy[row][col] != '1' && map->grid[row][col] != '1')
-// 	{
-// 		gridcopy[row][col] = '1';
-// 		printf("row %d: %s\n", row, gridcopy[row]);
-// 		if(find_path(row + 1, col, map, gridcopy))
-// 			return true;
-// 		if(find_path(row, col + 1, map, gridcopy))
-// 			return true;
-// 		if(find_path(row - 1, col, map, gridcopy))
-// 			return true;
-// 		if(find_path(row, col - 1, map, gridcopy))
-// 			return true;
-// 		gridcopy[row][col] = map->grid[row][col];
-// 		return false;
-// 	}
-// 	return false;
-// }
