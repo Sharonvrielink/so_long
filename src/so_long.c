@@ -6,11 +6,11 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/10/30 20:58:25 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/10/30 21:43:41 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include <so_long.h>
 
 void	delete_img(mlx_t *mlx, t_sprite *sprite)
 {
