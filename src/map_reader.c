@@ -6,20 +6,11 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/08 18:10:25 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/10/30 15:50:56 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/10/30 20:35:28 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
-
-void	print_lst(t_list *lst)
-{
-	while (lst)
-	{
-		printf("Content lst = %s", lst->content);
-		lst = lst->next;
-	}
-}
 
 int	load_into_lst(int fd, t_list **map_list)
 {
@@ -76,7 +67,7 @@ void	read_map(const char *map_file, t_map *map)
 	map_list = NULL;
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
-		return ; //Error: check map path, could not open the map file
+		so_long_error(MAP_FILE, NULL);
 	construct_map_data(map, &map_list, fd);
 	ft_lstclear(&map_list, free);
 	check_valid_map(map);

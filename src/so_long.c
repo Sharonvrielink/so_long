@@ -6,22 +6,20 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/09/22 21:29:23 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/10/30 20:58:25 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-//gcc main.c MLX42/libmlx42.a -I include -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
-
 #include "so_long.h"
 
-void    delete_img(mlx_t *mlx, t_sprite *sprite)
+void	delete_img(mlx_t *mlx, t_sprite *sprite)
 {
-    mlx_delete_image(mlx, sprite->space_img); //Cleanup the image after exit
-    mlx_delete_image(mlx, sprite->wall_img);
+	mlx_delete_image(mlx, sprite->space_img);
+	mlx_delete_image(mlx, sprite->wall_img);
 	mlx_delete_image(mlx, sprite->bush_img);
-    mlx_delete_image(mlx, sprite->collectible_img);
-    mlx_delete_image(mlx, sprite->exit_img);
-    mlx_delete_image(mlx, sprite->fox_img);
+	mlx_delete_image(mlx, sprite->chick_img);
+	mlx_delete_image(mlx, sprite->exit_img);
+	mlx_delete_image(mlx, sprite->fox_img);
 }
 
 void	window_init(t_game *game, const char *map_file)
@@ -30,30 +28,31 @@ void	window_init(t_game *game, const char *map_file)
 	int32_t	mapheight;
 	int32_t	screenwidth;
 	int32_t	screenheight;
-	
+
 	read_map(map_file, &game->map);
 	mapwidth = game->map.columnlen * TILESIZE;
 	mapheight = game->map.rowlen * TILESIZE;
-	game->mlx = mlx_init(mapwidth, mapheight, "MLX42", true);
+	game->mlx = mlx_init(mapwidth, mapheight, "so_long", true);
 	if (!game->mlx)
-        exit(EXIT_FAILURE); //These exit statuses are defined in stdlib, failure is 1 success = 0 
+		exit(EXIT_FAILURE);
 	mlx_get_monitor_size(0, &screenwidth, &screenheight);
 	if (screenwidth < mapwidth || screenheight < mapheight)
 		so_long_error_free(MAP_TOOBIG, game);
 }
-void	checkleaks(void)
+
+int32_t	so_long(const char *map_file)
 {
-	system("leaks so_long");
-}
-int32_t so_long(const char *map_file)
-{
-    t_game	game;
-	//atexit(&checkleaks);
+	t_game	game;
+	size_t	len;
+
+	len = ft_strlen(map_file);
+	if (ft_strncmp(map_file + len - 4, ".ber", 4))
+		so_long_error(MAP_EXTENSION, NULL);
 	window_init(&game, map_file);
-    load_textures(&game.sprite);
+	load_textures(&game.sprite);
 	load_images(game.mlx, &game.sprite);
-    printmap(&game);
-    mlx_loop_hook(game.mlx, &move_fox_hook, &game);
-    mlx_loop(game.mlx); //Rendering of mlx, which loops until the window is closed
-	return (so_long_error_free(SUCCES, &game)); //!!!!! Need to make a difference between won the game and exit the game
+	printmap(&game);
+	mlx_loop_hook(game.mlx, &move_fox_hook, &game);
+	mlx_loop(game.mlx);
+	return (so_long_error_free(CLOSE, &game));
 }

@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   copy_grid.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/09/01 13:09:30 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/10/30 20:59:41 by svrielin      ########   odam.nl         */
+/*   Created: 2022/10/30 21:24:15 by svrielin      #+#    #+#                 */
+/*   Updated: 2022/10/30 21:25:08 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include <so_long.h>
 
-int32_t	main(int argc, char **argv)
+char	**copy_grid(char **grid, int rowlen)
 {
-	if (argc != 2)
-		ft_printf("Give 1 path to file map\n");
-	else
-		so_long(argv[1]);
+	char	**copy;
+	int		row;
+
+	row = 0;
+	copy = malloc(rowlen * sizeof(char *));
+	if (!copy)
+		return (NULL);
+	while (row < rowlen)
+	{
+		copy[row] = ft_strdup(grid[row]);
+		row++;
+	}
+	return (copy);
 }

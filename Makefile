@@ -6,7 +6,7 @@
 #    By: svrielin <svrielin@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/09/07 14:21:16 by svrielin      #+#    #+#                  #
-#    Updated: 2022/09/22 19:01:33 by svrielin      ########   odam.nl          #
+#    Updated: 2022/10/30 21:35:39 by svrielin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,9 @@ CFLAGS			?=-Wall -Wextra -Werror$(if $(DEBUG), -g)$(if $(FSAN), -g -fsanitize=ad
 INCLUDE_FLAGS	?=-I include -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 #################################Project_files##################################
 SRC_DIR			:=	./src
-SRC_FILES		:=	so_long.c sprite_printer.c sprite_printer_utils.c map_reader.c valid_map_checker.c\
-					valid_path_checker.c error.c move_player.c main.c
+SRC_FILES		:=	so_long.c sprite_printer.c sprite_load_textures_images.c\
+					map_reader.c valid_map_checker.c valid_path_checker.c error.c\
+					move_player.c map_printer.c copy_grid.c main.c
 OBJ_DIR			:=	./obj
 OBJ_FILES		:=	$(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 MLXDIR			:= ./MLX42
