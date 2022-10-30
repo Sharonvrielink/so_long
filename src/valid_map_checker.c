@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 14:51:33 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/10/20 10:40:00 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/10/30 14:56:48 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	check_valid_map(t_map *map)
 			check_row(map->grid[row], map, &entity);
 		row++;
 	}
+	map->total_collectibles = entity.collectible;
 	check_entities(&entity, map);
 	return (check_valid_path(map));
 }

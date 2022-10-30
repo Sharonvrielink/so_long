@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/10/20 11:38:43 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/10/30 15:10:41 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef enum e_error
 	MAP_EXIT, //map should contain 1 exit
 	MAP_COLL, //map should contain at least 1 collectible
 	MAP_PATH, //map does not have a valid path
+	MAP_PATH_COLL, //No valid path that can collect all collectibles
 	MAP_TOOBIG, //map too big for current screen size
 	MAP_NORECTANGLE, //map is not rectangular
 }	t_error;
@@ -88,7 +89,20 @@ typedef struct s_map
 	int		startcolumn;
 	int		exitrow;
 	int		exitcolumn;
+	int		total_collectibles;
 }	t_map;
+
+// typedef struct s_grid_cell
+// {
+// 	int row;
+// 	int col;
+// }	t_grid_cell;
+
+// typedef struct s_grid_queue
+// {
+// 	t_grid_cell		cell;
+// 	struct s_grid_queue	*next;
+// }	t_grid_queue;
 
 typedef struct s_game
 {
@@ -107,6 +121,7 @@ void    		load_textures(t_sprite *sprite);
 void			load_images(mlx_t *mlx, t_sprite *sprite);
 void    		printsprite(t_game *game, t_mapsprite mapsprite, int32_t x, int32_t y);
 void    		printmap(t_game *game);
+void			print_lst(t_list *lst);
 void			read_map(const char *map_file, t_map *map);
 void			move_fox_hook(void *param);
 void			move_fox(t_game *game, t_direction direction);
