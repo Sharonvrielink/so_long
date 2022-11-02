@@ -6,7 +6,7 @@
 #    By: svrielin <svrielin@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/09/07 14:21:16 by svrielin      #+#    #+#                  #
-#    Updated: 2022/10/30 21:35:39 by svrielin      ########   odam.nl          #
+#    Updated: 2022/11/02 12:59:23 by svrielin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,12 +54,14 @@ clean:
 	@rm -f $(OBJ_FILES) 
 	@rm -df $(OBJ_DIR)
 	$(MAKE) -C $(LIBFTDIR) clean
+	$(MAKE) -C $(MLXDIR) clean
 	@echo "Object files and directory removed"
 
 fclean: clean
 	@rm -f $(NAME)
 	$(MAKE) -C $(LIBFTDIR) fclean
-	@echo "Library libft removed"
+	$(MAKE) -C $(MLXDIR) fclean
+	@echo "Libraries/executables removed"
 
 re: fclean all
 
