@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/21 14:59:58 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/02 13:58:54 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/02 14:26:09 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ const char	*texture_path(t_sprite_code sprite)
 	return (texture_path[sprite]);
 }
 
-void	load_textures(t_sprite *sprite)
+void	load_textures(t_game *game, t_sprite *sprite)
 {
 	int	i;
 
@@ -39,7 +39,7 @@ void	load_textures(t_sprite *sprite)
 	{
 		sprite->texture_array[i] = mlx_load_png(texture_path(i));
 		if (sprite->texture_array[i] == NULL)
-			return ; // add error message for something wrong with texture
+			so_long_error_free(WRONG, game);
 		i++;
 	}
 }

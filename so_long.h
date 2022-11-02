@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/02 13:48:27 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/02 14:25:17 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,13 @@ typedef enum e_error
 	MAP_PATH_COLL,
 	MAP_TOOBIG,
 	MAP_NORECTANGLE,
+	WRONG,
 	CLOSE,
 }	t_error;
 
 typedef struct s_sprite
 {
 	mlx_texture_t	*texture_array[10];
-	mlx_texture_t	*space_texture;
-	mlx_texture_t	*wall_texture;
-	mlx_texture_t	*bush_texture;
-	mlx_texture_t	*chick_texture;
-	mlx_texture_t	*dead_texture;
-	mlx_texture_t	*exit_texture;
-	mlx_texture_t	*foxdown_texture;
-	mlx_texture_t	*foxup_texture;
-	mlx_texture_t	*foxleft_texture;
-	mlx_texture_t	*foxright_texture;
 	mlx_image_t		*space_img;
 	mlx_image_t		*wall_img;
 	mlx_image_t		*bush_img;
@@ -126,7 +117,7 @@ typedef struct s_game
 int32_t			so_long(const char *map_file);
 const char		*error_messages(t_error errorcode);
 void			window_init(t_game *game, const char *map_file);
-void			load_textures(t_sprite *sprite);
+void			load_textures(t_game *game, t_sprite *sprite);
 void			load_images(mlx_t *mlx, t_sprite *sprite);
 char			**copy_grid(char **grid, int rowlen);
 bool			checkneighbors(char **grid, int32_t x, int32_t y);

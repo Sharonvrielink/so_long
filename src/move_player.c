@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/21 14:48:56 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/02 14:03:20 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/02 15:07:03 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	get_collectible(t_game *game, mlx_instance_t *collectible)
 		{
 			collectible[i].enabled = false;
 			id = mlx_image_to_window(game->mlx, game->sprite.dead_img, x, y);
+			if (id == -1)
+				so_long_error_free(WRONG, game);
 			mlx_set_instance_depth(&game->sprite.dead_img->instances[id], 1);
 			game->collected += 1;
 		}
@@ -85,17 +87,19 @@ void	move_fox(t_game *game, t_direction direction)
 	if (mapsprite != WALL)
 	{			
 		texture = choose_fox_texture(game, direction);
-		mlx_draw_texture(game->sprite.fox_img, texture, 0, 0);
-		if (direction == UP)
-			game->sprite.fox_img->instances[0].y -= TILESIZE;
-		if (direction == DOWN)
-			game->sprite.fox_img->instances[0].y += TILESIZE;
-		if (direction == LEFT)
-			game->sprite.fox_img->instances[0].x -= TILESIZE;
-		if (direction == RIGHT)
-			game->sprite.fox_img->instances[0].x += TILESIZE;
-		game->moves++;
-		ft_printf("Moves: %d\n", game->moves);
+		if (mlx_draw_texture(game->sprite.fox_img, texture, 0, 0))
+		{
+			if (direction == UP)
+				game->sprite.fox_img->instances[0].y -= TILESIZE;
+			if (direction == DOWN)
+				game->sprite.fox_img->instances[0].y += TILESIZE;
+			if (direction == LEFT)
+				game->sprite.fox_img->instances[0].x -= TILESIZE;
+			if (direction == RIGHT)
+				game->sprite.fox_img->instances[0].x += TILESIZE;
+			game->moves++;
+			ft_printf("Moves: %d\n", game->moves);
+		}
 	}
 	if (mapsprite == COLL)
 		get_collectible(game, game->sprite.chick_img->instances);

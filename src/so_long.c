@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/10/30 21:43:41 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/02 14:25:40 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int32_t	so_long(const char *map_file)
 	if (ft_strncmp(map_file + len - 4, ".ber", 4))
 		so_long_error(MAP_EXTENSION, NULL);
 	window_init(&game, map_file);
-	load_textures(&game.sprite);
+	load_textures(&game, &game.sprite);
 	load_images(game.mlx, &game.sprite);
 	printmap(&game);
 	mlx_loop_hook(game.mlx, &move_fox_hook, &game);

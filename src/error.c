@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 14:18:03 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/10/30 20:17:18 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/02 14:24:49 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ const char	*error_messages(t_error errorcode)
 		"Error: map has no valid path where everything can be collected\n",
 		"Error: map invalid, too big for current screen size\n",
 		"Error: map invalid, map is not rectangular\n",
+		"Error: something went wrong\n",
 		"Game closed\n",
 	};
 
