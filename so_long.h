@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/02 15:54:53 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/02 17:03:42 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ typedef struct s_game
 	t_sprite	sprite;
 	int32_t		total_collectibles;
 	int32_t		collected;
-	int32_t		frames;
 	int32_t		moves;
 }	t_game;
 
@@ -130,7 +129,7 @@ void			check_mapsprite(t_game *game, char c, int x, int y);
 void			printmap(t_game *game);
 void			print_lst(t_list *lst);
 void			read_map(const char *map_file, t_map *map);
-void			move_fox_hook(void *param);
+void			move_fox_hook(mlx_key_data_t keydata, void *param);
 void			move_fox(t_game *game, t_direction direction);
 void			get_collectible(t_game *game, mlx_instance_t *collectible);
 void			check_valid_map(t_map *map);

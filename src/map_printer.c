@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/30 20:52:37 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/02 16:13:26 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/02 17:04:19 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,11 @@ void	check_mapsprite(t_game *game, char c, int x, int y)
 		printsprite(game, EXIT, xpos, ypos);
 }
 
-//mlx_image_t* mlx_new_image(mlx_t* mlx, uint32_t width, uint32_t height);
-
 void	printmap(t_game *game)
 {
 	int	x;
 	int	y;
 
-	game->frames = 0;
 	game->moves = 0;
 	game->total_collectibles = 0;
 	game->collected = 0;

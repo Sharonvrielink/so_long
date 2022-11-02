@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/21 14:48:56 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/02 15:07:03 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/02 17:03:15 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,24 +107,23 @@ void	move_fox(t_game *game, t_direction direction)
 		so_long_error_free(SUCCES, game);
 }
 
-void	move_fox_hook(void *param)
+void	move_fox_hook(mlx_key_data_t keydata, void *param)
 {
 	t_game	*game;
 
 	game = param;
-	if (game->frames % 4 == 0)
-	{
-		if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
-			mlx_close_window(game->mlx);
-		else if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-			move_fox(game, UP);
-		else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-			move_fox(game, DOWN);
-		else if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-			move_fox(game, LEFT);
-		else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-			move_fox(game, RIGHT);
-		game->frames = 0;
-	}
-	game->frames++;
+	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(game->mlx);
+	else if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS || \
+	keydata.action == MLX_REPEAT))
+		move_fox(game, UP);
+	else if (keydata.key == MLX_KEY_S && (keydata.action == MLX_PRESS || \
+	keydata.action == MLX_REPEAT))
+		move_fox(game, DOWN);
+	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS || \
+	keydata.action == MLX_REPEAT))
+		move_fox(game, LEFT);
+	else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS || \
+	keydata.action == MLX_REPEAT))
+		move_fox(game, RIGHT);
 }

@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/02 16:03:31 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/02 16:58:26 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int32_t	so_long(const char *map_file)
 	load_textures(&game, &game.sprite);
 	load_images(game.mlx, &game.sprite);
 	printmap(&game);
-	mlx_loop_hook(game.mlx, &move_fox_hook, &game);
+	mlx_key_hook(game.mlx, &move_fox_hook, &game);
 	mlx_loop(game.mlx);
 	return (so_long_error_free(CLOSE, &game));
 }
