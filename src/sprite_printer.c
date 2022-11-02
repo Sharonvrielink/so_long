@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/08 13:24:24 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/02 15:20:19 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/02 16:11:26 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,15 @@ void	printwall(t_game *game, int32_t x, int32_t y)
 
 void	printspace(t_game *game, int32_t x, int32_t y)
 {
-	int32_t		id;
-	int32_t		depth;
-	mlx_image_t	*sprite;
+	// int32_t		id;
+	// int32_t		depth;
+	// mlx_image_t	*sprite;
 
-	depth = 0;
-	sprite = game->sprite.space_img;
-	id = mlx_image_to_window(game->mlx, sprite, x, y);
-	if (id == -1)
-		so_long_error_free(WRONG, game);
-	mlx_set_instance_depth(&sprite->instances[id], depth);
+	// depth = 0;
+	mlx_draw_texture(game->sprite.background, game->sprite.texture_array[GRASS], x, y);
+	// sprite = game->sprite.space_img;
+	// id = mlx_image_to_window(game->mlx, sprite, x, y);
+	// if (id == -1)
+	// 	so_long_error_free(WRONG, game);
+	// mlx_set_instance_depth(&sprite->instances[id], depth);
 }

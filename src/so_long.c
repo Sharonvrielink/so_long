@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/02 14:25:40 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/02 16:03:31 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,17 @@ void	delete_img(mlx_t *mlx, t_sprite *sprite)
 
 void	window_init(t_game *game, const char *map_file)
 {
-	int32_t	mapwidth;
-	int32_t	mapheight;
 	int32_t	screenwidth;
 	int32_t	screenheight;
 
 	read_map(map_file, &game->map);
-	mapwidth = game->map.columnlen * TILESIZE;
-	mapheight = game->map.rowlen * TILESIZE;
-	game->mlx = mlx_init(mapwidth, mapheight, "so_long", true);
+	game->map.mapwidth = game->map.columnlen * TILESIZE;
+	game->map.mapheight = game->map.rowlen * TILESIZE;
+	game->mlx = mlx_init(game->map.mapwidth, game->map.mapheight, "so_long", true);
 	if (!game->mlx)
 		exit(EXIT_FAILURE);
 	mlx_get_monitor_size(0, &screenwidth, &screenheight);
-	if (screenwidth < mapwidth || screenheight < mapheight)
+	if (screenwidth < game->map.mapwidth || screenheight < game->map.mapheight)
 		so_long_error_free(MAP_TOOBIG, game);
 }
 

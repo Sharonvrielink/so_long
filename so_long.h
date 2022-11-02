@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/02 14:25:17 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/02 15:54:53 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef enum e_error
 typedef struct s_sprite
 {
 	mlx_texture_t	*texture_array[10];
+	mlx_image_t		*background;
 	mlx_image_t		*space_img;
 	mlx_image_t		*wall_img;
 	mlx_image_t		*bush_img;
@@ -95,10 +96,10 @@ typedef struct s_map
 	char		**grid;
 	int			columnlen;
 	int			rowlen;
+	int32_t		mapwidth;
+	int32_t		mapheight;
 	int			startrow;
 	int			startcolumn;
-	int			exitrow;
-	int			exitcolumn;
 	int			total_collectibles;
 	t_entity	reached;
 }	t_map;

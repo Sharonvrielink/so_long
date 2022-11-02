@@ -6,13 +6,13 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 19:02:05 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/02 15:21:22 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/02 15:53:26 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 
-void	locate_start_finish(t_map *map)
+void	locate_start(t_map *map)
 {
 	int		row;
 	int		column;
@@ -27,11 +27,6 @@ void	locate_start_finish(t_map *map)
 			{
 				map->startrow = row;
 				map->startcolumn = column;
-			}
-			if (map->grid[row][column] == 'E')
-			{
-				map->exitrow = row;
-				map->exitcolumn = column;
 			}
 			column++;
 		}
@@ -87,7 +82,7 @@ void	check_valid_path(t_map *map)
 	map->reached.exit = 0;
 	map->reached.collectible = 0;
 	gridcopy = copy_grid(map->grid, map->rowlen);
-	locate_start_finish(map);
+	locate_start(map);
 	flood_fill(map->startrow, map->startcolumn, map, gridcopy);
 	row = 0;
 	while (row < map->rowlen)
