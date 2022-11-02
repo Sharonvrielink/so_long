@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/21 14:48:56 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/10/30 20:38:06 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/02 14:03:20 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ t_mapsprite	check_next_map_position(t_game *game, t_direction direction)
 mlx_texture_t	*choose_fox_texture(t_game *game, t_direction direction)
 {
 	if (direction == UP)
-		return (game->sprite.foxup_texture);
+		return (game->sprite.texture_array[FOX_UP]);
 	else if (direction == DOWN)
-		return (game->sprite.foxdown_texture);
+		return (game->sprite.texture_array[FOX_DOWN]);
 	else if (direction == LEFT)
-		return (game->sprite.foxleft_texture);
+		return (game->sprite.texture_array[FOX_LEFT]);
 	else if (direction == RIGHT)
-		return (game->sprite.foxright_texture);
+		return (game->sprite.texture_array[FOX_RIGHT]);
 	return (NULL);
 }
 

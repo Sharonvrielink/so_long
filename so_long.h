@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:44:29 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/10/30 21:36:53 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/02 13:48:27 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,20 @@ typedef enum e_direction
 	RIGHT,
 }	t_direction;
 
+typedef enum e_sprite_code
+{
+	GRASS,
+	HEDGE,
+	BUSH,
+	CHICK,
+	CHICK_DEAD,
+	FLAG,
+	FOX_UP,
+	FOX_DOWN,
+	FOX_LEFT,
+	FOX_RIGHT,
+}	t_sprite_code;
+
 typedef enum e_error
 {
 	SUCCES,
@@ -58,6 +72,7 @@ typedef enum e_error
 
 typedef struct s_sprite
 {
+	mlx_texture_t	*texture_array[10];
 	mlx_texture_t	*space_texture;
 	mlx_texture_t	*wall_texture;
 	mlx_texture_t	*bush_texture;
