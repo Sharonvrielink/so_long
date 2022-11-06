@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 14:18:03 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/06 20:30:41 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/06 21:47:27 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	so_long_error_free(t_error code, t_game *game)
 {
 	delete_img(game->mlx, &game->sprite);
 	mlx_terminate(game->mlx);
+	ft_printf("after terminate\n");
 	return (so_long_error(code, &game->map));
 }
 
