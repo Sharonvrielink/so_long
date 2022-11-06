@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 14:18:03 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/06 21:47:27 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/06 22:35:49 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ const char	*error_messages(t_error errorcode)
 
 int	so_long_error_free(t_error code, t_game *game)
 {
+	mlx_close_window(game->mlx);
 	delete_img(game->mlx, &game->sprite);
 	mlx_terminate(game->mlx);
-	ft_printf("after terminate\n");
 	return (so_long_error(code, &game->map));
 }
 
 int	so_long_error(t_error code, t_map *map)
 {
 	int	row;
-
+	
 	row = 0;
 	while (map && row < map->rowlen)
 	{
@@ -53,6 +53,7 @@ int	so_long_error(t_error code, t_map *map)
 			free(map->grid[row]);
 		row++;
 	}
+	free(map->grid);
 	ft_putstr_fd((char *)error_messages(code), STDERR_FILENO);
 	if (code == SUCCES)
 		exit(EXIT_SUCCESS);
