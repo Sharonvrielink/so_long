@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 14:18:03 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/02 14:24:49 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/06 18:38:23 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	so_long_error(t_error code, t_map *map)
 	row = 0;
 	while (map && row < map->rowlen)
 	{
-		free(map->grid[row]);
+		if (map->grid[row])
+			free(map->grid[row]);
 		row++;
 	}
 	ft_putstr_fd((char *)error_messages(code), STDERR_FILENO);

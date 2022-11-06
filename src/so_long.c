@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/02 16:58:26 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/06 16:56:32 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void	delete_img(mlx_t *mlx, t_sprite *sprite)
 {
-	mlx_delete_image(mlx, sprite->space_img);
+	mlx_delete_image(mlx, sprite->background);
 	mlx_delete_image(mlx, sprite->wall_img);
 	mlx_delete_image(mlx, sprite->bush_img);
 	mlx_delete_image(mlx, sprite->chick_img);
+	mlx_delete_image(mlx, sprite->dead_img);
 	mlx_delete_image(mlx, sprite->exit_img);
 	mlx_delete_image(mlx, sprite->fox_img);
 }

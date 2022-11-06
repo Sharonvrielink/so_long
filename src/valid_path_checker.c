@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 19:02:05 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/02 15:53:26 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/06 18:36:24 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void	locate_start(t_map *map)
 
 bool	if_valid_cell(int row, int col, t_map *map, char **gridcopy)
 {
-	if (gridcopy[row][col] != 'V' && map->grid[row][col] != '1')
+	if (row >= map->rowlen || col >= map->columnlen)
+		return (false);
+	else if (gridcopy[row][col] != 'V' && map->grid[row][col] != '1')
 		return (true);
 	else
 		return (false);
@@ -91,8 +93,8 @@ void	check_valid_path(t_map *map)
 		row++;
 	}
 	free (gridcopy);
-	if (map->reached.collectible != map->total_collectibles)
-		so_long_error(MAP_PATH_COLL, map);
 	if (map->reached.exit != 1)
 		so_long_error(MAP_PATH, map);
+	if (map->reached.collectible != map->total_collectibles)
+		so_long_error(MAP_PATH_COLL, map);
 }

@@ -6,11 +6,21 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/08 18:10:25 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/10/30 20:35:28 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/06 15:46:26 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
+
+size_t	line_len(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while(str[i] != '\n' && str[i] != '\0')
+		i++;
+	return (i);
+}
 
 int	load_into_lst(int fd, t_list **map_list)
 {
@@ -18,11 +28,13 @@ int	load_into_lst(int fd, t_list **map_list)
 	size_t	prev_columnlen;
 	char	*line;
 
-	columnlen = 0;
-	prev_columnlen = 0;
 	*map_list = NULL;
-	while (true)
+	line = get_next_line(fd);
+	columnlen = line_len(line);
+	prev_columnlen = columnlen;
+	while (line)
 	{
+		ft_lstadd_back(map_list, ft_lstnew(line));
 		if (columnlen != prev_columnlen)
 		{
 			ft_lstclear(map_list, free);
@@ -31,9 +43,8 @@ int	load_into_lst(int fd, t_list **map_list)
 		line = get_next_line(fd);
 		if (line)
 		{
-			columnlen = ft_strlen(line);
 			prev_columnlen = columnlen;
-			ft_lstadd_back(map_list, ft_lstnew(line));
+			columnlen = line_len(line);
 		}
 		else
 			break ;

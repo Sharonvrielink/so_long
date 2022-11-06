@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/21 14:59:58 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/02 14:26:09 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/06 14:13:23 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	load_textures(t_game *game, t_sprite *sprite)
 
 void	load_images(mlx_t *mlx, t_sprite *sprite)
 {
-	sprite->space_img = mlx_texture_to_image(mlx, sprite->texture_array[GRASS]);
+	//sprite->space_img = mlx_texture_to_image(mlx, sprite->texture_array[GRASS]);
 	sprite->wall_img = mlx_texture_to_image(mlx, sprite->texture_array[HEDGE]);
 	sprite->bush_img = mlx_texture_to_image(mlx, sprite->texture_array[BUSH]);
 	sprite->chick_img = mlx_texture_to_image(mlx, sprite->texture_array[CHICK]);

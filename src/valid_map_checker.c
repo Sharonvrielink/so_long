@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 14:51:33 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/10/30 20:40:04 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/06 18:35:50 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	check_row(char *row, t_map *map, t_entity *entity)
 	int	i;
 
 	i = 0;
-	if (row[0] != '1' && row[map->rowlen] != '1')
+	if (row[0] != '1' || row[map->columnlen - 1] != '1')
 		so_long_error(MAP_WALLS, map);
 	while (row[i] != '\0')
 	{
