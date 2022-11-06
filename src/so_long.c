@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/06 16:56:32 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/06 20:30:22 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	delete_img(mlx_t *mlx, t_sprite *sprite)
 {
+	int i;
+
+	i = 0;
 	mlx_delete_image(mlx, sprite->background);
 	mlx_delete_image(mlx, sprite->wall_img);
 	mlx_delete_image(mlx, sprite->bush_img);
@@ -21,6 +24,12 @@ void	delete_img(mlx_t *mlx, t_sprite *sprite)
 	mlx_delete_image(mlx, sprite->dead_img);
 	mlx_delete_image(mlx, sprite->exit_img);
 	mlx_delete_image(mlx, sprite->fox_img);
+
+	while (i < 10)
+	{
+		mlx_delete_texture(sprite->texture_array[i]);
+		i++;
+	}
 }
 
 void	window_init(t_game *game, const char *map_file)
