@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 16:41:54 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/06 22:27:03 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/10 12:31:50 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	delete_img(mlx_t *mlx, t_sprite *sprite)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	mlx_delete_image(mlx, sprite->background);
@@ -24,7 +24,6 @@ void	delete_img(mlx_t *mlx, t_sprite *sprite)
 	mlx_delete_image(mlx, sprite->dead_img);
 	mlx_delete_image(mlx, sprite->exit_img);
 	mlx_delete_image(mlx, sprite->fox_img);
-
 	while (i < 10)
 	{
 		mlx_delete_texture(sprite->texture_array[i]);
@@ -40,7 +39,7 @@ void	window_init(t_game *game, const char *map_file)
 	read_map(map_file, &game->map);
 	game->map.mapwidth = game->map.columnlen * TILESIZE;
 	game->map.mapheight = game->map.rowlen * TILESIZE;
-	game->mlx = mlx_init(game->map.mapwidth, game->map.mapheight, "so_long", true);
+	game->mlx = mlx_init(game->map.mapwidth, game->map.mapheight, "fox", false);
 	if (!game->mlx)
 		exit(EXIT_FAILURE);
 	mlx_get_monitor_size(0, &screenwidth, &screenheight);

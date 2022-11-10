@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/21 14:59:58 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/06 22:07:47 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/10 12:40:33 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 const char	*texture_path(t_sprite_code sprite)
 {
-	const char *texture_path[] = {
+	const char	*texture_path[] = {
 		"textures/Grass_Texture.png",
 		"textures/Hedge.png",
 		"textures/Bush.png",
@@ -46,10 +46,16 @@ void	load_textures(t_game *game, t_sprite *sprite)
 
 void	load_images(mlx_t *mlx, t_sprite *sprite)
 {
-	sprite->wall_img = mlx_texture_to_image(mlx, sprite->texture_array[HEDGE]);
-	sprite->bush_img = mlx_texture_to_image(mlx, sprite->texture_array[BUSH]);
-	sprite->chick_img = mlx_texture_to_image(mlx, sprite->texture_array[CHICK]);
-	sprite->dead_img = mlx_texture_to_image(mlx, sprite->texture_array[CHICK_DEAD]);
-	sprite->exit_img = mlx_texture_to_image(mlx, sprite->texture_array[FLAG]);
-	sprite->fox_img = mlx_texture_to_image(mlx, sprite->texture_array[FOX_DOWN]);
+	sprite->wall_img = mlx_texture_to_image(mlx, \
+	sprite->texture_array[HEDGE]);
+	sprite->bush_img = mlx_texture_to_image(mlx, \
+	sprite->texture_array[BUSH]);
+	sprite->chick_img = mlx_texture_to_image(mlx, \
+	sprite->texture_array[CHICK]);
+	sprite->dead_img = mlx_texture_to_image(mlx, \
+	sprite->texture_array[CHICK_DEAD]);
+	sprite->exit_img = mlx_texture_to_image(mlx, \
+	sprite->texture_array[FLAG]);
+	sprite->fox_img = mlx_texture_to_image(mlx, \
+	sprite->texture_array[FOX_DOWN]);
 }

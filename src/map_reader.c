@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/08 18:10:25 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/06 15:46:26 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/10 12:24:14 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	line_len(const char *str)
 	size_t	i;
 
 	i = 0;
-	while(str[i] != '\n' && str[i] != '\0')
+	while (str[i] != '\n' && str[i] != '\0')
 		i++;
 	return (i);
 }
@@ -46,8 +46,6 @@ int	load_into_lst(int fd, t_list **map_list)
 			prev_columnlen = columnlen;
 			columnlen = line_len(line);
 		}
-		else
-			break ;
 	}
 	return (columnlen);
 }

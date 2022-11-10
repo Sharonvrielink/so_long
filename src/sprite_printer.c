@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/08 13:24:24 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/06 18:37:50 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/10 12:45:02 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	printsprite(t_game *game, t_mapsprite mapsprite, int32_t x, int32_t y)
 	int32_t		depth;
 	mlx_image_t	*sprite;
 
-	depth = 0;
 	if (mapsprite == PLAYER)
 	{
 		sprite = game->sprite.fox_img;
@@ -80,5 +79,6 @@ void	printwall(t_game *game, int32_t x, int32_t y)
 
 void	printspace(t_game *game, int32_t x, int32_t y)
 {
-	mlx_draw_texture(game->sprite.background, game->sprite.texture_array[GRASS], x, y);
+	mlx_draw_texture(game->sprite.background, \
+	game->sprite.texture_array[GRASS], x, y);
 }

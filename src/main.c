@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/01 13:09:30 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/06 15:54:13 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/10 12:24:26 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,5 @@ int32_t	main(int argc, char **argv)
 		ft_printf("Give 1 path to file map\n");
 	else
 		so_long(argv[1]);
-	system("leaks so_long");
 	return (0);
 }

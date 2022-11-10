@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/30 20:52:37 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/06 22:20:37 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/10 11:02:52 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,19 @@ void	check_mapsprite(t_game *game, char c, int x, int y)
 
 void	printmap(t_game *game)
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
+	int32_t		width;
+	int32_t		height;
 
 	game->moves = 0;
 	game->total_collectibles = 0;
 	game->collected = 0;
 	x = 0;
 	y = 0;
-	game->sprite.background = mlx_new_image(game->mlx, game->map.mapwidth, game->map.mapheight);
+	width = game->map.mapwidth;
+	height = game->map.mapheight;
+	game->sprite.background = mlx_new_image(game->mlx, width, height);
 	mlx_image_to_window(game->mlx, game->sprite.background, 0, 0);
 	while (y < (game->map.rowlen))
 	{
