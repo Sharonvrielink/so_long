@@ -6,7 +6,7 @@
 /*   By: svrielin <svrielin@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/22 14:18:03 by svrielin      #+#    #+#                 */
-/*   Updated: 2022/11/10 12:29:34 by svrielin      ########   odam.nl         */
+/*   Updated: 2022/11/12 14:22:50 by svrielin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	so_long_error_free(t_error code, t_game *game)
 	if (game->mlx)
 	{
 		mlx_close_window(game->mlx);
-		delete_img(game->mlx, &game->sprite);
+		if (code != MAP_TOOBIG)
+			delete_img(game->mlx, &game->sprite);
 		mlx_terminate(game->mlx);
 		game->mlx = NULL;
 	}
